@@ -7,7 +7,7 @@ from app.controllers.pokemon import PokemonController
 class PokemonApi(Resource):
     method_decorators = [token_required]
 
-    def get(self, current_user):
+    def get(self):
         parameters = self.__get_parameters()
         parameters, order_by_parameters = self.__process_params(parameters)
         response = PokemonController.retrieve_list(
