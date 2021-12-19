@@ -1,10 +1,22 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask import Response
 
-app = Flask(__name__)
-app.config.from_object("app.config")
+# Globally accessible libraries
+db = SQLAlchemy()
 
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+def create_app(config='app.config'):
+    """Initialize the core application."""
+    app = Flask(__name__)
+    app.config.from_object(config)
+
+    # Initialize Plugins
+    db.init_app(app)
+    migrate = Migrate(app, db)
+
+    with app.app_context():
+        # Include our Routes
+        from app.auth import routes
+        from app.pokemon import routes
+
+        return app

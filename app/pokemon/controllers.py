@@ -1,6 +1,6 @@
-from app.managers.pokemon import PokemonManager
-from models.pokemon import Pokemon
-from models.serializers.pokemon import PokemonSchema
+from .managers import PokemonManager
+from .models import Pokemon
+from .serializers import PokemonSchema
 
 class PokemonController:
 

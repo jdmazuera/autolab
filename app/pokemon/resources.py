@@ -1,7 +1,9 @@
 from flask_restful import Resource, reqparse
 from flask import Response
-from app.decorators.token_required import token_required
-from app.controllers.pokemon import PokemonController
+from .controllers import PokemonController
+
+#External imports
+from app.auth.decorators import token_required
 
 
 class PokemonApi(Resource):

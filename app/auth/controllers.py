@@ -1,7 +1,7 @@
 import jwt
 import datetime
-from app import app
-from app.managers.user import UserManager
+from flask import current_app as app
+from .managers import UserManager
 from werkzeug.security import check_password_hash
 
 class AuthController:
@@ -15,7 +15,7 @@ class AuthController:
         """
         user = UserManager.get({"name": username})
         
-        if check_password_hash(user.password, password):
+        if user and check_password_hash(user.password, password):
             token = jwt.encode({'public_id': user.public_id, 'exp': datetime.datetime.utcnow(
             ) + datetime.timedelta(minutes=30)}, 'Th1s1ss3cr3t')
             return token.decode('UTF-8')

@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask import make_response, jsonify, request
-from app.controllers.auth import AuthController
+from .controllers import AuthController
 
 
 class AuthApi(Resource):
