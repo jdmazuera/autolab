@@ -1,5 +1,5 @@
 SQLALCHEMY_DATABASE_URI = (
-    'sqlite:///app_flask_testing.db'
+    'sqlite:///../app_flask_testing.db'
 )
 
 TESTING = True
