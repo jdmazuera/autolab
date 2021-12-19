@@ -1,12 +1,17 @@
 from flask_restful import Resource, reqparse
 from flask import Response
+from app.decorators.token_required import token_required
 from app.controllers.pokemon import PokemonController
 
+
 class PokemonApi(Resource):
-    def get(self):
+    method_decorators = [token_required]
+
+    def get(self, current_user):
         parameters = self.__get_parameters()
         parameters, order_by_parameters = self.__process_params(parameters)
-        response = PokemonController.retrieve_list(parameters, order_by_parameters)
+        response = PokemonController.retrieve_list(
+            parameters, order_by_parameters)
         return Response(response,  mimetype='application/json')
 
     def __get_parameters(self):
@@ -38,10 +43,14 @@ class PokemonApi(Resource):
         parser.add_argument("attack__gt", type=int, store_missing=False)
         parser.add_argument("defense__lt", type=int, store_missing=False)
         parser.add_argument("defense__gt", type=int, store_missing=False)
-        parser.add_argument("special_attack__lt", type=int, store_missing=False)
-        parser.add_argument("special_attack__gt", type=int, store_missing=False)
-        parser.add_argument("special_defense__lt", type=int, store_missing=False)
-        parser.add_argument("special_defense__gt", type=int, store_missing=False)
+        parser.add_argument("special_attack__lt",
+                            type=int, store_missing=False)
+        parser.add_argument("special_attack__gt",
+                            type=int, store_missing=False)
+        parser.add_argument("special_defense__lt",
+                            type=int, store_missing=False)
+        parser.add_argument("special_defense__gt",
+                            type=int, store_missing=False)
         parser.add_argument("speed__lt", type=int, store_missing=False)
         parser.add_argument("speed__gt", type=int, store_missing=False)
         parser.add_argument("generation__lt", type=int, store_missing=False)

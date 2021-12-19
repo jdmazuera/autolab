@@ -7,6 +7,7 @@ from flask import current_app
 
 from alembic import context
 from models.pokemon import Pokemon
+from models.users import Users
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -10,7 +10,7 @@ def token_required(f):
     def decorator(*args, **kwargs):
 
         token = None
-
+        print(request.headers)
         if 'x-access-tokens' in request.headers:
             token = request.headers['x-access-tokens']
 

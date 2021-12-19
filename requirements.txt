@@ -5,3 +5,6 @@ Flask-SQLAlchemy
 pandas
 marshmallow
 marshmallow-sqlalchemy
+PyJWT==1.7.1
+uuid
+datetime
