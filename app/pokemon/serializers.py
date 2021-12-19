@@ -5,3 +5,4 @@ class PokemonSchema(SQLAlchemyAutoSchema):
     
     class Meta:
         model = Pokemon
+        exclude = ('id',)
