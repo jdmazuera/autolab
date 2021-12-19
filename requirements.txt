@@ -1,0 +1,7 @@
+Flask
+Flask-Migrate
+Flask-RESTful
+Flask-SQLAlchemy
+pandas
+marshmallow
+marshmallow-sqlalchemy
