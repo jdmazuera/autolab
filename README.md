@@ -8,12 +8,12 @@
 
 <p>After please run the command, it will load data of pokemons from csv file to the database</p>
 
-**python -m load_data --file_path=pokemon.csv**
+**python -m scripts.load_data --file_path=pokemon.csv**
 
 <p>To create a user please execute the command, it will create a user with username as admin 
 and password as admin you can change this values if you want</p>
 
-**python -m create_user --username=admin --password=admin**
+**python -m scripts.create_user --username=admin --password=admin**
 ## Execute the application
 
 <p>To execute the application execute the command</p>

@@ -1,7 +1,7 @@
 import argparse
 import pandas as pd
-from app import db
-from models.pokemon import Pokemon
+from app import create_app, db
+from app.pokemon.models import Pokemon
 
 class LoadDataController:
     
@@ -32,7 +32,7 @@ class LoadDataController:
         self.db_session.commit()
 
 def get_parameters():
-    parser = argparse.ArgumentParser("load_data")
+    parser = argparse.ArgumentParser("scripts.load_data")
     parser.add_argument("--file_path", required=True)
 
     args = parser.parse_args()
@@ -40,9 +40,11 @@ def get_parameters():
 
 if __name__ == "__main__":
     try:
-        params = get_parameters()
-        process = LoadDataController(**params)
-        process.run_process()
+        app = create_app()
+        with app.app_context():
+            params = get_parameters()
+            process = LoadDataController(**params)
+            process.run_process()
     except IndexError as e:
         print(e)
         raise e

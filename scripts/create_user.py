@@ -2,8 +2,8 @@ import argparse
 import uuid
 import pandas as pd
 from werkzeug.security import generate_password_hash
-from app import db
-from models.users import Users
+from app import db, create_app
+from app.auth.models import Users
 
 class CreateUserController:
     
@@ -19,7 +19,7 @@ class CreateUserController:
         self.db_session.commit()
 
 def get_parameters():
-    parser = argparse.ArgumentParser("create_user")
+    parser = argparse.ArgumentParser("scripts.create_user")
     parser.add_argument("--username", required=True)
     parser.add_argument("--password", required=True)
     args = parser.parse_args()
@@ -27,9 +27,11 @@ def get_parameters():
 
 if __name__ == "__main__":
     try:
-        params = get_parameters()
-        process = CreateUserController(**params)
-        process.run_process()
+        app = create_app()
+        with app.app_context():
+            params = get_parameters()
+            process = CreateUserController(**params)
+            process.run_process()
     except IndexError as e:
         print(e)
         raise e
